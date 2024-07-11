@@ -32,7 +32,7 @@ def main():
     # Get user input
     text = st.text_area("Enter text to convert to speech:", height=300)
 
-    target_language = st.selectbox("Select text language:", ["en","hi", "es","te", "fr","it","gu","mr","ta","ur","bn"])  # Add more languages as needed
+    target_language = st.selectbox("Select text language:", ["en","hi", "es","te", "fr","it","gu","mr","ta","ur","bn","de","pt","nl","ja","ko","ru","ar","th","tr","pl","cs","sv","da","fi","el","hu","uk","no","id","vi","ro","fa","iw","bg","ca","hr","sr","sk","sl","lt","lv","et","is","ga","sq","mk","hy","ka","ne","si","km","jw"])  # Add more languages as needed
 
     # Add a button to trigger the text-to-speech conversion
     if st.button("Convert to Speech and Download Audio"):
