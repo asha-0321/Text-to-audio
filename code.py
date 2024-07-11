@@ -27,12 +27,12 @@ def get_binary_file_downloader_html(link_text, file_path, file_format):
     return download_link
 
 def main():
-    st.title("Text to Audio Conversion with Translation")
+    st.title("Text to Audio Conversion ")
 
     # Get user input
     text = st.text_area("Enter text to convert to speech:", height=300)
 
-    target_language = st.selectbox("Select target language for translation and speech:", ["en", "hi", "es","te", "fr"])  # Add more languages as needed
+    target_language = st.selectbox("Select text language:", ["en", "hi", "es","te", "fr"])  # Add more languages as needed
 
     # Add a button to trigger the text-to-speech conversion
     if st.button("Convert to Speech and Download Audio"):
