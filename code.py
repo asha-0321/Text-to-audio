@@ -3,7 +3,15 @@ from gtts import gTTS
 from googletrans import Translator, LANGUAGES
 import os
 import base64
-
+language_mapping={
+    "en":"English",
+    "hi":"Hindi",
+    "gu":"Gujarati",
+    "ta":"Tamil",
+    "te":"Telugu",
+    "fr":"French",
+    "es":"Spanish"
+}
 # Function to translate text
 def translate_text(text, target_language='en'):
     translator = Translator()
@@ -32,7 +40,7 @@ def main():
     # Get user input
     text = st.text_area("Enter text to convert to speech:", height=300)
 
-    target_language = st.selectbox("Select target language for translation and speech:", ["english", "hindi", "spanish", "france", "telugu", "tamil", "kanada"])  # Add more languages as needed
+    target_language = st.selectbox("Select target language for translation and speech:", ["en", "hi", "gu", "ta", "te", "fr", "es"])  # Add more languages as needed
 
     # Add a button to trigger the text-to-speech conversion
     if st.button("Convert to Speech and Download Audio"):
