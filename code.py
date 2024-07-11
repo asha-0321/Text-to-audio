@@ -101,6 +101,10 @@ def main():
         # Translate text to the selected language
         translated_text = translate_text(text, target_language_code)
 
+        # Display the translated text
+        st.write("Translated Text:")
+        st.write(translated_text)
+
         # Convert translated text to speech
         success = convert_text_to_speech(translated_text, output_file, language=target_language_code)
 
