@@ -4,6 +4,63 @@ from googletrans import Translator
 import os
 import base64
 
+# Dictionary to map language codes to full names
+LANGUAGES = {
+    "en": "English",
+    "hi": "Hindi",
+    "es": "Spanish",
+    "te": "Telugu",
+    "fr": "French",
+    "it": "Italian",
+    "gu": "Gujarati",
+    "mr": "Marathi",
+    "ta": "Tamil",
+    "ur": "Urdu",
+    "bn": "Bengali",
+    "de": "German",
+    "pt": "Portuguese",
+    "nl": "Dutch",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "th": "Thai",
+    "tr": "Turkish",
+    "pl": "Polish",
+    "cs": "Czech",
+    "sv": "Swedish",
+    "da": "Danish",
+    "fi": "Finnish",
+    "el": "Greek",
+    "hu": "Hungarian",
+    "uk": "Ukrainian",
+    "no": "Norwegian",
+    "id": "Indonesian",
+    "vi": "Vietnamese",
+    "ro": "Romanian",
+    "fa": "Persian",
+    "iw": "Hebrew",
+    "bg": "Bulgarian",
+    "ca": "Catalan",
+    "hr": "Croatian",
+    "sr": "Serbian",
+    "sk": "Slovak",
+    "sl": "Slovenian",
+    "lt": "Lithuanian",
+    "lv": "Latvian",
+    "et": "Estonian",
+    "is": "Icelandic",
+    "ga": "Irish",
+    "sq": "Albanian",
+    "mk": "Macedonian",
+    "hy": "Armenian",
+    "ka": "Georgian",
+    "ne": "Nepali",
+    "si": "Sinhala",
+    "km": "Khmer",
+    "jw": "Javanese"
+}
+
 # Function to translate text
 def translate_text(text, target_language='en'):
     translator = Translator()
@@ -32,17 +89,20 @@ def main():
     # Get user input
     text = st.text_area("Enter text to convert to speech:", height=300)
 
-    target_language = st.selectbox("Select text language:", ["en","hi", "es","te", "fr","it","gu","mr","ta","ur","bn","de","pt","nl","ja","ko","ru","ar","th","tr","pl","cs","sv","da","fi","el","hu","uk","no","id","vi","ro","fa","iw","bg","ca","hr","sr","sk","sl","lt","lv","et","is","ga","sq","mk","hy","ka","ne","si","km","jw"])  # Add more languages as needed
+    target_language_name = st.selectbox("Select text language:", list(LANGUAGES.values()))
+
+    # Get the corresponding language code
+    target_language_code = [code for code, name in LANGUAGES.items() if name == target_language_name][0]
 
     # Add a button to trigger the text-to-speech conversion
     if st.button("Convert to Speech and Download Audio"):
         output_file = "output.mp3"
         
         # Translate text to the selected language
-        translated_text = translate_text(text, target_language)
+        translated_text = translate_text(text, target_language_code)
 
         # Convert translated text to speech
-        success = convert_text_to_speech(translated_text, output_file, language=target_language)
+        success = convert_text_to_speech(translated_text, output_file, language=target_language_code)
 
         if success:
             # Play the generated speech
