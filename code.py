@@ -1,17 +1,9 @@
 import streamlit as st
 from gtts import gTTS
-from googletrans import Translator, LANGUAGES
+from googletrans import Translator
 import os
 import base64
-language_mapping={
-    "en":"English",
-    "hi":"Hindi",
-    "gu":"Gujarati",
-    "ta":"Tamil",
-    "te":"Telugu",
-    "fr":"French",
-    "es":"Spanish"
-}
+
 # Function to translate text
 def translate_text(text, target_language='en'):
     translator = Translator()
@@ -35,12 +27,12 @@ def get_binary_file_downloader_html(link_text, file_path, file_format):
     return download_link
 
 def main():
-    st.title("Text to Audio Conversion")
+    st.title("Text to Audio Conversion with Translation")
 
     # Get user input
     text = st.text_area("Enter text to convert to speech:", height=300)
 
-    target_language = st.selectbox("Select target language for translation and speech:"( ["en", "hi", "gu", "ta", "te", "fr", "es"])  # Add more languages as needed
+    target_language = st.selectbox("Select target language for translation and speech:", ["en", "hi", "es","te", "fr"])  # Add more languages as needed
 
     # Add a button to trigger the text-to-speech conversion
     if st.button("Convert to Speech and Download Audio"):
@@ -62,5 +54,5 @@ def main():
         else:
             st.warning("Failed to generate audio. Please check your input.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
