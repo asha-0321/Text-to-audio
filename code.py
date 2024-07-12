@@ -3,8 +3,6 @@ from gtts import gTTS
 from googletrans import Translator
 import os
 import base64
-from PyPDF2 import PdfReader
-import docx2txt
 
 # Dictionary to map language codes to full names
 LANGUAGES = {
@@ -86,25 +84,10 @@ def get_binary_file_downloader_html(link_text, file_path, file_format):
     return download_link
 
 def main():
-    st.title("Text to Audio Conversion")
+    st.title("Text to Audio Conversion ")
 
     # Get user input
-    input_option = st.selectbox("Choose input type", ["Text", "File"])
-
-    text = ""
-    if input_option == "Text":
-        text = st.text_area("Enter text to convert to speech:", height=300)
-    elif input_option == "File":
-        uploaded_file = st.file_uploader("Choose a file", type=["txt", "pdf", "docx"])
-        if uploaded_file is not None:
-            if uploaded_file.type == "text/plain":
-                text = str(uploaded_file.read(), "utf-8")
-            elif uploaded_file.type == "application/pdf":
-                pdf_reader = PdfReader(uploaded_file)
-                for page in pdf_reader.pages:
-                    text += page.extract_text()
-            elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                text = docx2txt.process(uploaded_file)
+    text = st.text_area("Enter text to convert to speech:", height=300)
 
     target_language_name = st.selectbox("Select text language:", list(LANGUAGES.values()))
 
@@ -117,10 +100,6 @@ def main():
         
         # Translate text to the selected language
         translated_text = translate_text(text, target_language_code)
-
-        # Display the translated text
-        st.write("Translated Text:")
-        st.write(translated_text)
 
         # Convert translated text to speech
         success = convert_text_to_speech(translated_text, output_file, language=target_language_code)
@@ -135,5 +114,5 @@ def main():
         else:
             st.warning("Failed to generate audio. Please check your input.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
